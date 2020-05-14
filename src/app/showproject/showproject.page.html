@@ -1,0 +1,135 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Proyecto KANBAN: {{name_project}}</ion-title>
+		<ion-buttons slot="primary">
+
+			<ion-button color="tertiary" fill="outline" (click)="addUserHistory(id,name_project)">
+				Nueva historia
+				<ion-icon name="add-circle"></ion-icon>
+			</ion-button>
+
+			<ion-button color="tertiary" fill="outline" (click)="addTable(id,name_project)">
+				Nueva Tabla
+				<ion-icon name="add-circle"></ion-icon>
+			</ion-button>
+
+			<ion-button color="tertiary" fill="outline" (click)="toProjects()">
+				Proyectos
+				<ion-icon name="arrow-back"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+
+	</ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+	<ion-card>
+
+		<ion-card-content>
+			<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+
+				<ion-refresher-content pullingText="Tira para refrescar el contenido" refreshingSpinner="circles"
+					refreshingText="Refrescando...">
+					<ion-icon name="arrow-dropdown-circle"></ion-icon>
+				</ion-refresher-content>
+			</ion-refresher>
+			<ion-grid class="grid-container" cdkDropListGroup>
+
+				<ion-row>
+					<ion-col id="historias">
+						<ion-list class="listaHistorias" class="example-list">
+
+							<ion-list-header>
+								<ion-card-title>
+									Historias
+								</ion-card-title>
+							</ion-list-header>
+							<ion-item cdkDropList id="UserHistorys" [cdkDropListConnectedTo]="['TablesList']"
+								[cdkDropListData]="historys">
+
+								<div *ngFor="let history of historys" class="historias" draggable="true" cdkDrag >
+										<ion-list-header *ngIf="history.userhistory_tableId == 0">
+
+											<ion-label>
+												<ion-icon name="albums"></ion-icon>
+												{{history.userhistory_name}}
+											</ion-label>
+										<ion-buttons>
+											<ion-button size="small" color="danger"
+												(click)="confirmDeleteUserHistory(history.userhistory_id)">
+												<ion-icon name="trash"></ion-icon>
+											</ion-button>
+											<ion-button size="small"
+												(click)="updateUserHistory(id,name_project,history.userhistory_id,history.userhistory_name)">
+												<ion-icon color="primary" name="refresh-circle">
+												</ion-icon>
+											</ion-button>
+										</ion-buttons>
+										</ion-list-header>
+
+									</div>
+
+							</ion-item>
+
+						</ion-list>
+					</ion-col>
+
+				</ion-row>
+				<ion-row>
+					<ion-col *ngFor="let table of tables" size="2.5" 
+					class="tablas" id="{{table.table_id}}" >
+						<ion-list-header>
+							<ion-card-title>
+								{{table.name_table}}
+							</ion-card-title>
+							<ion-buttons>
+								<ion-button size="small" color="danger" (click)="confirmDelete(table.table_id)">
+									<ion-icon name="trash"></ion-icon>
+								</ion-button>
+								<ion-button size="small"
+									(click)="updateTable(id,name_project,table.table_id,table.name_table)">
+									<ion-icon color="primary" name="refresh-circle"></ion-icon>
+								</ion-button>
+							</ion-buttons>
+						</ion-list-header>
+
+						<ion-item *ngFor="let history of historys" id="{{history.userhistory_id}}" >
+
+							<div cdkDropList id="TablesList" [cdkDropListConnectedTo]="['UserHistorys']"
+								(cdkDropListDropped)="onDrop(table.table_id,history.userhistory_id, $event)"
+								class="wrapper">
+	
+								<div class="historias" draggable="true" cdkDrag>
+										<ion-list-header *ngIf="history.userhistory_tableId == table.table_id">
+											<ion-label>
+												{{history.userhistory_name}}
+											</ion-label>
+											<ion-buttons>
+												<ion-button size="small" color="danger"
+													(click)="confirmDeleteUserHistory(history.userhistory_id)">
+													<ion-icon name="trash"></ion-icon>
+												</ion-button>
+												<ion-button size="small"
+													(click)="updateUserHistory(id,name_project,history.userhistory_id,history.userhistory_name)">
+													<ion-icon color="primary" name="refresh-circle">
+													</ion-icon>
+												</ion-button>
+											</ion-buttons>
+										</ion-list-header>
+								</div>
+							</div>
+	
+						</ion-item>
+											
+					</ion-col>
+		
+				</ion-row>
+
+			</ion-grid>
+
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Actualizar Historia de Usuario</ion-title>
+    <ion-buttons slot="primary">
+		<ion-back-button color="tertiary" fill="outline">  
+			<ion-icon name="arrow-round-back"></ion-icon>
+		</ion-back-button>
+		
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-item>
+		<ion-label position="floating"> Nombre </ion-label>
+		<ion-input type="text" [(ngModel)]="userhistory_name" required></ion-input>
+	</ion-item>
+
+	<!-- <ion-button expand="block" padding color="tertiary" *ngIf="!id && !userhistory_name == '' " (click)="addProcess()" fill="outline">Añadir</ion-button> -->
+	<ion-button expand="block" padding color="tertiary" (click)="updateProcess()" fill="outline">Actualizar</ion-button>
+
+</ion-content>
