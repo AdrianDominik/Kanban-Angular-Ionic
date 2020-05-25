@@ -1,36 +1,36 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Registro</ion-title>
-	<ion-buttons slot="primary">
-		<ion-back-button color="tertiary" fill="outline">
-			<ion-icon name="arrow-round-back"></ion-icon>
-		</ion-back-button>
-		
-    </ion-buttons>
-</ion-toolbar>
+	<ion-toolbar>
+		<ion-title>Registro</ion-title>
+		<ion-buttons slot="primary">
+			<ion-back-button color="tertiary" fill="outline">
+				<ion-icon name="arrow-round-back"></ion-icon>
+			</ion-back-button>
+
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-list>
+	<ion-list>
 
-	  <ion-item>
-	    <ion-label position="floating">Usuario</ion-label>
-	    <ion-input type="text" [(ngModel)]="username"></ion-input>
-	  </ion-item>
+		<ion-item>
+			<ion-label position="floating">Usuario</ion-label>
+			<ion-input type="text" [(ngModel)]="username"></ion-input>
+		</ion-item>
 
-	  <ion-item>
-	    <ion-label position="floating">Contraseña</ion-label>
-	    <ion-input type="password" [(ngModel)]="password"></ion-input>
-	  </ion-item>
+		<ion-item>
+			<ion-label position="floating">Contraseña</ion-label>
+			<ion-input type="password" [(ngModel)]="password"></ion-input>
+		</ion-item>
 
-	  <ion-item>
-	    <ion-label position="floating">Confirmar contraseña </ion-label>
-	    <ion-input type="password" [(ngModel)]="confirm_password"></ion-input>
-	  </ion-item>
+		<ion-item>
+			<ion-label position="floating">Confirmar contraseña </ion-label>
+			<ion-input type="password" [(ngModel)]="confirm_password"></ion-input>
+		</ion-item>
 
 	</ion-list>
 
 	<div>
-	  <ion-button expand="block" padding color="tertiary" (click)="prosesRegister()">Registrarse</ion-button>
+		<ion-button expand="block" padding color="tertiary" (click)="prosesRegister()">Registrarse</ion-button>
 	</div>
 </ion-content>

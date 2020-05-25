@@ -40,23 +40,6 @@ export class UpdateuserhistoryPage implements OnInit {
 		});
 	}
 
-	addProcess() {
-		return new Promise(resolve => {
-				let body = {
-					aksi: 'adduserhistory',
-					userhistory_name: this.userhistory_name,
-					userhistory_projectId: this.userhistory_projectId,
-					userhistory_tableId: this.userhistory_tableId
-				};
-				console.log(body);
-				this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-				this.router.navigate([this.goBack()]);
-			});	
-				
-		});
-
-	}
-
 	goBack() {
 		this._location.back();
 	}

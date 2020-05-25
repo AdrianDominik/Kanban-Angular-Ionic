@@ -5,9 +5,6 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/Storage';
 import { AlertController } from '@ionic/angular';
 
-import { ViewChild } from '@angular/core';
-import { IonReorderGroup } from '@ionic/angular';
-
 @Component({
   selector: 'app-project',
   templateUrl: './project.page.html',
@@ -18,7 +15,6 @@ export class projectPage implements OnInit {
   
   anggota: any;
   username: string;
-  
   projects: any = [];
   limit: number = 13; // LIMIT GET PERDATA
   start: number = 0;
@@ -43,8 +39,6 @@ export class projectPage implements OnInit {
       this.user_id = this.anggota.user_id;
       console.log(res);
     });
-
-    
 
   	this.projects = [];
   	this.start = 0;

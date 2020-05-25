@@ -47,9 +47,9 @@
 								</ion-card-title>
 							</ion-list-header>
 							<ion-item cdkDropList id="UserHistorys" [cdkDropListConnectedTo]="['TablesList']"
-								[cdkDropListData]="historys">
+								[cdkDropListData]="historys" *ngFor="let history of historys">
 
-								<div *ngFor="let history of historys" class="historias" draggable="true" cdkDrag >
+								<div class="historias" draggable="true" cdkDrag >
 										<ion-list-header *ngIf="history.userhistory_tableId == 0">
 
 											<ion-label>
@@ -95,14 +95,15 @@
 							</ion-buttons>
 						</ion-list-header>
 
-						<ion-item *ngFor="let history of historys" id="{{history.userhistory_id}}" >
+						<div *ngFor="let history of historys">
+						<ion-item  id="{{history.userhistory_id}}" >
 
 							<div cdkDropList id="TablesList" [cdkDropListConnectedTo]="['UserHistorys']"
 								(cdkDropListDropped)="onDrop(table.table_id,history.userhistory_id, $event)"
 								class="wrapper">
 	
-								<div class="historias" draggable="true" cdkDrag>
-										<ion-list-header *ngIf="history.userhistory_tableId == table.table_id">
+								<div class="historias" cdkDrag *ngIf="history.userhistory_tableId == table.table_id">
+										<ion-list-header >
 											<ion-label>
 												{{history.userhistory_name}}
 											</ion-label>
@@ -122,7 +123,7 @@
 							</div>
 	
 						</ion-item>
-											
+					</div>			
 					</ion-col>
 		
 				</ion-row>

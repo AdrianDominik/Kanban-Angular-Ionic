@@ -63,8 +63,7 @@ export class addprojectPage implements OnInit {
 			let body = {
 				aksi: 'update',
 				project_id: this.id,
-				name_project: this.name_project,
-				desc_project: this.desc_project
+				name_project: this.name_project
 			};
 
 			this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {

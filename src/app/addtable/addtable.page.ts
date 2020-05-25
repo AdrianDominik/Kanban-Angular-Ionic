@@ -57,23 +57,6 @@ export class AddtablePage implements OnInit {
 		this._location.back();
 	}
 
-	updateProcess() {
-		return new Promise(resolve => {
-			let body = {
-				aksi: 'updatetable',
-				table_id: this.id,
-				name_table: this.name_table,
-			};
-
-			this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-				this.router.navigate(['/project']);
-				console.log('OK');
-			});
-
-		});
-
-	}
-
 	async requiredFields(){
 		const toast = await this.toastCtrl.create({
 			message: 'Los campos deben estar rellenados.',

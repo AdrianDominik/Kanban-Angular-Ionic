@@ -59,23 +59,6 @@ export class AdduserhistoryPage implements OnInit {
 		this._location.back();
 	}
 
-	updateProcess() {
-		return new Promise(resolve => {
-			let body = {
-				aksi: 'updateuserhistory',
-				userhistory_id: this.id,
-				userhistory_name: this.userhistory_name,
-			};
-
-			this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-				this.router.navigate(['/project']);
-				console.log('OK');
-			});
-
-		});
-
-	}
-
 	async requiredFields(){
 		const toast = await this.toastCtrl.create({
 			message: 'Los campos deben estar rellenados.',

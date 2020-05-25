@@ -3,7 +3,6 @@ import { PostProvider } from '../../providers/post-provider';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/Storage';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-showproject',
@@ -24,8 +23,6 @@ export class ShowprojectPage implements OnInit {
   tablesId: any = [];
   historys: any = [];
   historysOnTables: any = [];
-  limit: number = 13; // LIMIT GET PERDATA
-  start: number = 0;
   anggota: any;
   username: string;
   project_id: number;
@@ -78,27 +75,15 @@ export class ShowprojectPage implements OnInit {
 
     this.tables = [];
     this.historys = [];
-  	this.start = 0;
     this.loadTable();
     this.loadUserhistory();
     this.loadDataUserHistoryOnTables();
-  }
-
-  loadData(event:any){
-  	this.start += this.limit;
-  	setTimeout(() =>{
-  	this.loadTable().then(()=>{
-  		event.target.complete();
-  	});
-  	}, 500);
   }
 
   loadTable(){
   	return new Promise(resolve => {
   		let body = {
   			aksi : 'getdatatable',
-  			limit : this.limit,
-        start : this.start,
         project_id : this.id
   		};
 
@@ -113,28 +98,16 @@ export class ShowprojectPage implements OnInit {
         }
         this.tableId1 = this.tableId1.slice(0, -1);
 
-        console.log(this.tableId1);
-        console.log(this.tables);
   			resolve(true);
   		});
   	});
   }
 
-  loadDataUserHistory(event:any){
-  	this.start += this.limit;
-  	setTimeout(() =>{
-  	this.loadUserhistory().then(()=>{
-  		event.target.complete();
-  	});
-  	}, 500);
-  }
 
   loadUserhistory(){
   	return new Promise(resolve => {
   		let body = {
   			aksi : 'getdatauserhistory',
-  			limit : this.limit,
-        start : this.start,
         userhistory_projectId : this.id,
         userhistory_tableId: this.userhistory_tableId
   		};
@@ -150,7 +123,6 @@ export class ShowprojectPage implements OnInit {
   }
 
   loadDataUserHistoryOnTables(){
-  	this.start += this.limit;
   	setTimeout(() =>{
   	this.loadUserHistoryOnTables().then(()=>{
   	});
@@ -161,8 +133,6 @@ export class ShowprojectPage implements OnInit {
   	return new Promise(resolve => {
   		let body = {
   			aksi : 'getdatauserhistoryontables',
-  			limit : this.limit,
-        start : this.start,
         userhistory_projectId : this.id,
         userhistory_tableId : this.tableId1
   		};
@@ -281,9 +251,5 @@ export class ShowprojectPage implements OnInit {
       });
     
   } 
-  
-  drop() {
-    
-  }
 
 }

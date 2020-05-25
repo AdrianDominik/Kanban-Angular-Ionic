@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
 
       this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
         var alertpesan = data.msg;
+        console.log(data.msg);
         if(data.success){
           this.storage.set('session_storage', data.result);
           this.router.navigate(['/project']);

@@ -38,22 +38,6 @@ export class UpdatetablePage implements OnInit {
 		});
 	}
 
-	addProcess() {
-		return new Promise(resolve => {
-				let body = {
-					aksi: 'addtable',
-					name_table: this.name_table,
-					project_id: this.project_id
-				};
-				console.log(this.id);
-				this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-				this.router.navigate([this.goBack()]);
-			});	
-				
-		});
-
-	}
-
 	goBack() {
 		this._location.back();
 	}
