@@ -37,9 +37,11 @@ export class addprojectPage implements OnInit {
 			this.name_project = data.name;
 			this.desc_project = data.desc;
 			console.log(data);
-			//let user_id = sessionStorage.getItem('user_id');
-			//console.log({user_id});
 		});
+	}
+
+	toProjects() {
+		this.router.navigate(['/project']);
 	}
 
 	addProcess() {
@@ -51,6 +53,7 @@ export class addprojectPage implements OnInit {
 			};
 			console.log(body);
 			this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
+				this.creatingToast();
 				this.router.navigate(['/project']);
 			});
 
@@ -67,6 +70,7 @@ export class addprojectPage implements OnInit {
 			};
 
 			this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
+				this.updatingToast();
 				this.router.navigate(['/project']);
 				console.log('OK');
 			});
@@ -120,6 +124,22 @@ export class addprojectPage implements OnInit {
 				resolve(true);
 			});
 		});
+	}
+
+	async creatingToast() {
+		const toast = await this.toastCtrl.create({
+			message: 'Creando proyecto...',
+			duration: 1000
+		});
+		toast.present();
+	}
+
+	async updatingToast() {
+		const toast = await this.toastCtrl.create({
+			message: 'Actualizando proyecto...',
+			duration: 1000
+		});
+		toast.present();
 	}
 
 }

@@ -1,22 +1,52 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Actualizar Historia de Usuario</ion-title>
-    <ion-buttons slot="primary">
-		<ion-back-button color="tertiary" fill="outline">  
-			<ion-icon name="arrow-round-back"></ion-icon>
-		</ion-back-button>
-		
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+	<ion-slide>
+		<div class="contaier-login">
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<h1>Nueva Historia de Usuario</h1>
+					</ion-col>
 
-	<ion-item>
-		<ion-label position="floating"> Nombre </ion-label>
-		<ion-input type="text" [(ngModel)]="userhistory_name" required></ion-input>
-	</ion-item>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-list>
 
-	<ion-button expand="block" padding color="tertiary" (click)="updateProcess()" fill="outline">Actualizar</ion-button>
+							<ion-item>
+								<ion-input placeholder="Nombre" type="text" [(ngModel)]="userhistory_name" required>
+								</ion-input>
+							</ion-item>
 
+							<ion-segment value="`+color+`" [(ngModel)]="userhistory_color">
+								<ion-segment-button value="black" style=color:black>
+									<ion-icon name="brush"></ion-icon>
+								</ion-segment-button>
+								<ion-segment-button value="blue" style=color:lightblue>
+									<ion-icon name="brush"></ion-icon>
+								</ion-segment-button>
+								<ion-segment-button value="green" style=color:lightgreen>
+									<ion-icon name="brush"></ion-icon>
+								</ion-segment-button>
+								<ion-segment-button value="red" style=color:red>
+									<ion-icon name="brush"></ion-icon>
+								</ion-segment-button>
+							</ion-segment>
+
+						</ion-list>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-button expand="block" padding color="tertiary" *ngIf="!userhistory_name == '' && !userhistory_color == ''" (click)="updateProcess()" fill="outline">
+							Actualizar</ion-button>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-button expand="full" fill="outline" (click)="goBack()">Volver</ion-button>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+	</ion-slide>
 </ion-content>

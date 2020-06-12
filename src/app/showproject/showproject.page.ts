@@ -3,6 +3,7 @@ import { PostProvider } from '../../providers/post-provider';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/Storage';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-showproject',
@@ -12,19 +13,14 @@ import { Storage } from '@ionic/Storage';
 
 export class ShowprojectPage implements OnInit {
 
-  userhistory_name: string = "";
 	userhistory_tableId: number = 0;
-  name_table: string;
   name_project: string;
-  desc_project: string;
   created_at: string;
   id: number;
   tables: any = [];
-  tablesId: any = [];
   historys: any = [];
   historysOnTables: any = [];
   anggota: any;
-  username: string;
   project_id: number;
   userhistory_projectId: number;
   tableId1: string = "";
@@ -34,7 +30,8 @@ export class ShowprojectPage implements OnInit {
   	private postPvdr: PostProvider,
     private actRoute: ActivatedRoute,
     public alertController: AlertController,
-    private storage: Storage
+    private storage: Storage,
+  	public toastCtrl: ToastController
 
   ) { }
 
@@ -168,7 +165,8 @@ export class ShowprojectPage implements OnInit {
   		};
 
   		this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-  			this.ionViewWillEnter();
+        this.ionViewWillEnter();
+        this.deleteToast();
   		});
 
   }
@@ -204,7 +202,8 @@ export class ShowprojectPage implements OnInit {
   		};
 
   		this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-  			this.ionViewWillEnter();
+        this.ionViewWillEnter();
+        this.deleteToast();
   		});
 
   }
@@ -240,16 +239,33 @@ export class ShowprojectPage implements OnInit {
         let body = {
           aksi: 'updateuserhistorykanbas',
           userhistory_id: userhistory_id,
-          userhistory_tableId: userhistory_tableId
+          userhistory_tableId: userhistory_tableId,
         };
         console.log(body);
         this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
+          this.savingToast();
           this.doRefreshAfterUpdate(ev);
           console.log('OK');
         });
   
       });
     
-  } 
+  }
+
+  async savingToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Guardando...',
+      duration: 1000
+    });
+    toast.present();
+  }
+
+  async deleteToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Eliminando...',
+      duration: 1000
+    });
+    toast.present();
+  }
 
 }

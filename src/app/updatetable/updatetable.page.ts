@@ -25,16 +25,18 @@ export class UpdatetablePage implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.actRoute.params.subscribe((data: any) =>{
-		this.project_id = data.id;
-		this.id = data.idTable;
-		console.log(data);
-	  });
+		this.actRoute.params.subscribe((data: any) => {
+			this.project_id = data.id;
+			this.id = data.idTable;
+			this.name_table = data.nameTable;
+			console.log(data);
+			console.log(data.nameTable);
+		});
 	}
 
-	ionViewWillEnter(){
-		this.storage.get('session_storage').then((res)=>{
-		  console.log(res);
+	ionViewWillEnter() {
+		this.storage.get('session_storage').then((res) => {
+			console.log(res);
 		});
 	}
 
@@ -51,7 +53,8 @@ export class UpdatetablePage implements OnInit {
 			};
 			console.log(body);
 			this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-				this.router.navigate(['/project']);
+				this.updatingToast();
+				this.router.navigate([this.goBack()]);
 				console.log('OK');
 			});
 
@@ -59,12 +62,20 @@ export class UpdatetablePage implements OnInit {
 
 	}
 
-	async requiredFields(){
+	async requiredFields() {
 		const toast = await this.toastCtrl.create({
 			message: 'Los campos deben estar rellenados.',
 			duration: 3000
-		  });
+		});
 		toast.present();
-	  }
+	}
+
+	async updatingToast() {
+		const toast = await this.toastCtrl.create({
+			message: 'Actualizando tabla...',
+			duration: 1000
+		});
+		toast.present();
+	}
 
 }

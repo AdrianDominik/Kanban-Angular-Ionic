@@ -1,37 +1,45 @@
-<ion-header>
-	<ion-toolbar>
+<ion-header id="header">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+	<ion-toolbar class="toolbar">
 		<ion-title>
-			<ion-button color="tertiary" fill="outline" (click)="addproject()">
 				Bienvenido {{username}}
-				<ion-icon name="construct"></ion-icon>
-
-			</ion-button>
 		</ion-title>
-		
 
 		<ion-buttons slot="primary">
-			<ion-button color="tertiary" fill="outline" (click)="addproject()">
-				Nuevo Proyecto
-				<ion-icon name="add-circle"></ion-icon>
 
+			<mat-menu #appMenu="matMenu" class="matMenu">
+				<ion-button color="tertiary" fill="outline" (click)="addproject()">
+					Nuevo Proyecto
+					<ion-icon name="add-circle"></ion-icon>
+				</ion-button>
+	
+				<ion-button  color="tertiary" fill="outline" (click)="confirmLogout()">
+					Cerrar Sesión
+					<ion-icon slot="end" name="log-out"></ion-icon>
+				</ion-button>
 
-			</ion-button>
-			<ion-button color="tertiary" fill="outline" (click)="confirmLogout()">
-				<ion-icon slot="end" name="log-out"></ion-icon>
-			</ion-button>
+			  </mat-menu>
+			  
+			  <ion-button mat-icon-button [matMenuTriggerFor]="appMenu">
+				<mat-icon>Menu</mat-icon>
+			  </ion-button>
+
 		</ion-buttons>
 
 	</ion-toolbar>
+
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen id="content">
 	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content pullingText="Tira para refrescar el contenido"
 			refreshingSpinner="circles" refreshingText="Refrescando...">
 			<ion-icon name="arrow-dropdown-circle"></ion-icon>
 		</ion-refresher-content>
 	</ion-refresher>
-	<ion-list>
+
+	<ion-list id="ionlista">
 			<ion-item-sliding *ngFor="let project of projects">
 
 				<ion-item-options side="start">
@@ -49,7 +57,6 @@
 							<br>
 							<ion-icon name="calendar"></ion-icon>
 							Creado el: {{project.created_at}}
-
 						</ion-title>
 						
 					</ion-label>

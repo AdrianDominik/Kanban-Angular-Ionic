@@ -1,7 +1,120 @@
-
-#listaHistorias {
-    border-style: solid;
     
+    .listaHistorias {
+        grid-area: listaHistorias;
+    }
+    
+    .tablas {
+        grid-area: tablas;
+    }
+
+    .grid-container{
+        font-size: 10px;
+        width: 100%;
+        margin: 0 auto;
+        display:grid;
+        grid-template-columns:12fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas:"listaHistorias"
+                            "tablas"
+                            "tablas"
+                            "tablas";
+      }
+
+      ion-button {
+        width: 98% !important;
+    }
+
+    .toolbar {
+        --background: lightblue;
+    }
+
+    .ion-card-title {
+        font-size: 15px;
+    }
+
+    .cdk-drag-animating {
+        transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+      }
+    
+      ion-label {
+        width : 100%;
+        overflow:hidden;
+        display:inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      ion-card {
+        --background: url('/../../../assets/icon/home-hero-bg.png')  no-repeat center center / cover ;
+    }
+
+    .matMenu {
+        border: solid black 1px;
+    }
+
+    ion-list-header {
+        border-radius: 1rem;
+        border-bottom: orange 3px solid;
+        text-align: center;
+    }
+
+    ion-col {
+        border: 2px solid black;
+        margin: 0.5rem;
+        border-radius: 1rem;
+        background-color: lightgrey;
+    }
+
+    ion-content[scrollx=true], ion-content[scrolly=true] {
+        position: relative;
+        overflow: hidden;
+      
+        ::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      
+      ion-content[scrollx=true] {
+        overflow-x: auto;
+      }
+      
+      ion-content[scrolly=true] {
+        overflow-y: auto;
+      }
+
+  @media only screen and (min-width: 768px) {
+
+    ion-card {
+        --background: url('/../../../assets/icon/home-hero-bg.png')  no-repeat center center / cover ;
+    }
+
+    .matMenu {
+        border: solid black 1px;
+    }
+
+    ion-list-header {
+        border-radius: 1rem;
+        border-bottom: orange 3px solid;
+        text-align: center;
+    }
+
+ion-button {
+    width: 98% !important;
+}
+
+.toolbar {
+    --background: lightblue;
+}
+
+.historias {
+    width: 100%;
+    margin-top: 0.5rem;
+    box-shadow: 5px 10px 8px #888888;
+    background-color: white;
+}
+
+#historias {
+    background-color: white;
 }
 
 .listaHistorias {
@@ -12,16 +125,15 @@
     grid-area: tablas;
 }
 
-ion-list-header {
-    border: 1px solid black;
-}
-
 ion-col {
-    border: 1px solid black;
+    border: 2px solid black;
     margin: 0.5rem;
+    border-radius: 1rem;
+    background-color: lightgrey;
 }
 
 .grid-container{
+    font-size: 14px;
     width: 100%;
     margin: 0 auto;
     display:grid;
@@ -34,6 +146,7 @@ ion-col {
   .wrapper {
       width: 100%;
       height: 4rem;
+      background-color: lightgray;
   }
 
   ion-item {
@@ -43,4 +156,14 @@ ion-col {
 
 .cdk-drag-animating {
     transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  ion-label {
+    width : 100%;
+    overflow:hidden;
+    display:inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   }

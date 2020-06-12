@@ -4,6 +4,7 @@ import { PostProvider } from '../../providers/post-provider';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/Storage';
 import { AlertController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-project',
@@ -25,7 +26,8 @@ export class projectPage implements OnInit {
   	private postPvdr: PostProvider,
     private storage: Storage,
     public toastCtrl: ToastController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private menu: MenuController
   ) { }
 
   ngOnInit() {
@@ -42,7 +44,8 @@ export class projectPage implements OnInit {
 
   	this.projects = [];
   	this.start = 0;
-  	this.loadproject();
+    this.loadproject();
+    this.showWelcome();
   }
 
   addproject(){
@@ -54,7 +57,16 @@ export class projectPage implements OnInit {
   }
 
   showproject(id,name){
+    this.entering();
   	this.router.navigate(['/showproject/' + id + '/' + name]);
+  }
+
+  async entering() {
+    const toast = await this.toastCtrl.create({
+      message: 'Cargando...',
+      duration: 1000
+    });
+    toast.present();
   }
 
   doRefresh(event){
@@ -162,6 +174,14 @@ export class projectPage implements OnInit {
     await alert.present();
   }
 
-  
+  async showWelcome() {
+    const alert = await this.alertController.create({
+      header: 'Tablero Kanban',
+      subHeader: '¡Bienvenido!',
+      message: 'Este es un proyecto de aprendizaje, que consiste en crear una app  de un <strong>Tablero Kanban para proyectos</strong>.<br/><br/><small><strong>Nota:</strong><br/> 1. El proyecto sigue en desarrollo, por lo que aún es sensible a los cambios.<br/>',
+      buttons: ['OK']
+    });
+    return await alert.present();
+  }
 
 }

@@ -46,6 +46,7 @@ export class AddtablePage implements OnInit {
 				};
 				console.log(this.id);
 				this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
+				this.creatingToast();
 				this.router.navigate([this.goBack()]);
 			});	
 				
@@ -57,11 +58,23 @@ export class AddtablePage implements OnInit {
 		this._location.back();
 	}
 
+	toProjects() {
+		this.router.navigate(['/project']);
+	}
+
 	async requiredFields(){
 		const toast = await this.toastCtrl.create({
 			message: 'Los campos deben estar rellenados.',
 			duration: 3000
 		  });
+		toast.present();
+	  }
+
+	  async creatingToast() {
+		const toast = await this.toastCtrl.create({
+		  message: 'Creando tabla...',
+		  duration: 1000
+		});
 		toast.present();
 	  }
 

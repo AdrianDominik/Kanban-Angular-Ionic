@@ -13,6 +13,7 @@ import { Storage } from '@ionic/Storage';
 export class UpdateuserhistoryPage implements OnInit {
 
 	userhistory_name: string = "";
+	userhistory_color: string = "";
 	userhistory_projectId: number = 0;
 	userhistory_tableId: number = 0;
 	id: number;
@@ -30,13 +31,14 @@ export class UpdateuserhistoryPage implements OnInit {
 		this.actRoute.params.subscribe((data: any) => {
 			this.userhistory_projectId = data.id;
 			this.idUserHistory = data.idUserHistory;
+			this.userhistory_name = data.nameUserHistory;
 			console.log(data);
 		});
 	}
 
-	ionViewWillEnter(){
-		this.storage.get('session_storage').then((res)=>{
-		  console.log(res);
+	ionViewWillEnter() {
+		this.storage.get('session_storage').then((res) => {
+			console.log(res);
 		});
 	}
 
@@ -49,11 +51,13 @@ export class UpdateuserhistoryPage implements OnInit {
 			let body = {
 				aksi: 'updateuserhistory',
 				userhistory_id: this.idUserHistory,
-				userhistory_name: this.userhistory_name
+				userhistory_name: this.userhistory_name,
+				userhistory_color: this.userhistory_color
 			};
 			console.log(body);
 			this.postPvdr.postData(body, 'proses-api.php').subscribe(data => {
-				this.router.navigate(['/project']);
+				this.updatingToast();
+				this.router.navigate([this.goBack()]);
 				console.log('OK');
 			});
 
@@ -61,12 +65,20 @@ export class UpdateuserhistoryPage implements OnInit {
 
 	}
 
-	async requiredFields(){
+	async requiredFields() {
 		const toast = await this.toastCtrl.create({
 			message: 'Los campos deben estar rellenados.',
 			duration: 3000
-		  });
+		});
 		toast.present();
-	  }
+	}
+
+	async updatingToast() {
+		const toast = await this.toastCtrl.create({
+			message: 'Actualizando historia...',
+			duration: 1000
+		});
+		toast.present();
+	}
 
 }

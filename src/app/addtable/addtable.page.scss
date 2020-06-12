@@ -1,0 +1,26 @@
+ion-content {
+    --background: url('/../../../assets/icon/home-hero-bg.png')  no-repeat center center / cover ;
+}
+
+.contaier-login {
+    width: 90%;
+    padding: 10px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+}
+
+@media only screen and (min-width: 768px) {
+
+    .contaier-login {
+        width: 20%;
+        padding: 10px;
+        background: #FFFFFF;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+    }
+}

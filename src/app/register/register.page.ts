@@ -74,7 +74,7 @@ export class RegisterPage implements OnInit {
   
   }
 
-  formLogin(){
+  toLogin(){
   	this.router.navigate(['/login']);
   }
 

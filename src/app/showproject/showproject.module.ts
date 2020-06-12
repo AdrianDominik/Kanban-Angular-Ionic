@@ -6,6 +6,7 @@ import {Component} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ShowprojectPage } from './showproject.page';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatMenuModule} from '@angular/material/menu';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    DragDropModule
+    DragDropModule,
+    MatMenuModule
   ],
   declarations: [ShowprojectPage]
 })

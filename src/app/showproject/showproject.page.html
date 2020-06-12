@@ -1,31 +1,38 @@
-<ion-header>
-	<ion-toolbar>
+<ion-header id="header">
+	<ion-toolbar class="toolbar">
 		<ion-title>Proyecto KANBAN: {{name_project}}</ion-title>
 		<ion-buttons slot="primary">
 
-			<ion-button color="tertiary" fill="outline" (click)="addUserHistory(id,name_project)">
-				Nueva historia
-				<ion-icon name="add-circle"></ion-icon>
+			<mat-menu #appMenu="matMenu" class="matMenu">
+				<ion-button color="tertiary" fill="outline" (click)="addUserHistory(id,name_project)">
+					Nueva historia
+					<ion-icon name="add-circle"></ion-icon>
+				</ion-button>
+
+				<ion-button color="tertiary" fill="outline" (click)="addTable(id,name_project)">
+					Nueva Tabla
+					<ion-icon name="add-circle"></ion-icon>
+				</ion-button>
+
+				<ion-button color="tertiary" fill="outline" (click)="toProjects()">
+					Proyectos
+					<ion-icon name="arrow-back"></ion-icon>
+				</ion-button>
+			</mat-menu>
+
+			<ion-button mat-icon-button [matMenuTriggerFor]="appMenu">
+				<mat-icon>Menu</mat-icon>
 			</ion-button>
 
-			<ion-button color="tertiary" fill="outline" (click)="addTable(id,name_project)">
-				Nueva Tabla
-				<ion-icon name="add-circle"></ion-icon>
-			</ion-button>
-
-			<ion-button color="tertiary" fill="outline" (click)="toProjects()">
-				Proyectos
-				<ion-icon name="arrow-back"></ion-icon>
-			</ion-button>
 		</ion-buttons>
 
 	</ion-toolbar>
 
 </ion-header>
 
-<ion-content>
+<ion-content id="content">
 
-	<ion-card>
+	<ion-card id="card">
 
 		<ion-card-content>
 			<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
@@ -38,50 +45,48 @@
 			<ion-grid class="grid-container" cdkDropListGroup>
 
 				<ion-row>
-					<ion-col id="historias">
-						<ion-list class="listaHistorias" class="example-list">
+					<ion-col id="historias" style="background-color: lightgray;">
+						<ion-list-header>
+							<ion-card-title class="ion-card-title">
+								Historias
+							</ion-card-title>
+						</ion-list-header>
 
-							<ion-list-header>
-								<ion-card-title>
-									Historias
-								</ion-card-title>
-							</ion-list-header>
-							<ion-item cdkDropList id="UserHistorys" [cdkDropListConnectedTo]="['TablesList']"
-								[cdkDropListData]="historys" *ngFor="let history of historys">
+						<div class="listaHistorias" >
 
-								<div class="historias" draggable="true" cdkDrag >
-										<ion-list-header *ngIf="history.userhistory_tableId == 0">
+							<div cdkDropList id="UserHistorys" [cdkDropListConnectedTo]="['TablesList']"
+								[cdkDropListData]="historys" *ngFor="let history of historys" class="wrapper">
 
-											<ion-label>
-												<ion-icon name="albums"></ion-icon>
-												{{history.userhistory_name}}
-											</ion-label>
-										<ion-buttons>
-											<ion-button size="small" color="danger"
-												(click)="confirmDeleteUserHistory(history.userhistory_id)">
-												<ion-icon name="trash"></ion-icon>
-											</ion-button>
-											<ion-button size="small"
-												(click)="updateUserHistory(id,name_project,history.userhistory_id,history.userhistory_name)">
-												<ion-icon color="primary" name="refresh-circle">
-												</ion-icon>
-											</ion-button>
-										</ion-buttons>
-										</ion-list-header>
+								<div class="historias" draggable="true" cdkDrag
+									*ngIf="history.userhistory_tableId == 0">
+									<ion-label style="background-color: {{history.userhistory_color}}; color: white;">
+										<ion-icon slot="end" name="menu"></ion-icon>
+										{{history.userhistory_name}}
+									</ion-label>
+									<ion-buttons>
+										<ion-button size="small" color="danger"
+											(click)="confirmDeleteUserHistory(history.userhistory_id)">
+											<ion-icon name="trash"></ion-icon>
+										</ion-button>
+										<ion-button size="small"
+											(click)="updateUserHistory(id,name_project,history.userhistory_id,history.userhistory_name)">
+											<ion-icon color="primary" name="refresh-circle">
+											</ion-icon>
+										</ion-button>
+									</ion-buttons>
 
-									</div>
+								</div>
 
-							</ion-item>
+							</div>
 
-						</ion-list>
+						</div>
 					</ion-col>
 
 				</ion-row>
 				<ion-row>
-					<ion-col *ngFor="let table of tables" size="2.5" 
-					class="tablas" id="{{table.table_id}}" >
+					<ion-col *ngFor="let table of tables" size="2.8" class="tablas" id="{{table.table_id}}">
 						<ion-list-header>
-							<ion-card-title>
+							<ion-card-title class="ion-card-title">
 								{{table.name_table}}
 							</ion-card-title>
 							<ion-buttons>
@@ -95,37 +100,33 @@
 							</ion-buttons>
 						</ion-list-header>
 
-						<div *ngFor="let history of historys">
-						<ion-item  id="{{history.userhistory_id}}" >
+						<div *ngFor="let history of historys" position="floating" id="{{history.userhistory_id}}">
 
 							<div cdkDropList id="TablesList" [cdkDropListConnectedTo]="['UserHistorys']"
 								(cdkDropListDropped)="onDrop(table.table_id,history.userhistory_id, $event)"
 								class="wrapper">
-	
-								<div class="historias" cdkDrag *ngIf="history.userhistory_tableId == table.table_id">
-										<ion-list-header >
-											<ion-label>
-												{{history.userhistory_name}}
-											</ion-label>
-											<ion-buttons>
-												<ion-button size="small" color="danger"
-													(click)="confirmDeleteUserHistory(history.userhistory_id)">
-													<ion-icon name="trash"></ion-icon>
-												</ion-button>
-												<ion-button size="small"
-													(click)="updateUserHistory(id,name_project,history.userhistory_id,history.userhistory_name)">
-													<ion-icon color="primary" name="refresh-circle">
-													</ion-icon>
-												</ion-button>
-											</ion-buttons>
-										</ion-list-header>
+
+								<div cdkDrag *ngIf="history.userhistory_tableId == table.table_id" class="historias">
+									<ion-label style="background-color: {{history.userhistory_color}}; color: white;">
+										<ion-icon slot="end" name="menu"></ion-icon>
+										{{history.userhistory_name}}
+									</ion-label>
+									<ion-buttons>
+										<ion-button size="small" color="danger"
+											(click)="confirmDeleteUserHistory(history.userhistory_id)">
+											<ion-icon name="trash"></ion-icon>
+										</ion-button>
+										<ion-button size="small"
+											(click)="updateUserHistory(id,name_project,history.userhistory_id,history.userhistory_name)">
+											<ion-icon color="primary" name="refresh-circle">
+											</ion-icon>
+										</ion-button>
+									</ion-buttons>
 								</div>
 							</div>
-	
-						</ion-item>
-					</div>			
+						</div>
 					</ion-col>
-		
+
 				</ion-row>
 
 			</ion-grid>

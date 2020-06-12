@@ -51,6 +51,7 @@
 
 	$query = mysqli_query($mysqli, "INSERT INTO master_userhistory SET
 		userhistory_name = '$postjson[userhistory_name]',
+		userhistory_color = '$postjson[userhistory_color]',
 		created_at = '$today',
 		userhistory_tableId = '$postjson[userhistory_tableId]',
 		userhistory_projectId = '$postjson[userhistory_projectId]'
@@ -118,6 +119,7 @@
 		$data[] = array(
 			'userhistory_id' => $row['userhistory_id'],
 			'userhistory_name' => $row['userhistory_name'],
+			'userhistory_color' => $row['userhistory_color'],
 			'created_at' => $row['created_at'],
 			'userhistory_tableId' => $row['userhistory_tableId'],
 			'userhistory_projectId' => $row['userhistory_projectId']
@@ -141,6 +143,7 @@ elseif($postjson['aksi']=='getdatauserhistoryontables'){
 		$data[] = array(
 			'userhistory_id' => $row['userhistory_id'],
 			'userhistory_name' => $row['userhistory_name'],
+			'userhistory_color' => $row['userhistory_color'],
 			'created_at' => $row['created_at'],
 			'userhistory_tableId' => $row['userhistory_tableId'],
 			'userhistory_projectId' => $row['userhistory_projectId']
@@ -179,7 +182,7 @@ elseif($postjson['aksi']=='getdatauserhistoryontables'){
 
   elseif($postjson['aksi']=='updateuserhistory'){
 	$query = mysqli_query($mysqli, "UPDATE master_userhistory SET 
-		userhistory_name='$postjson[userhistory_name]' WHERE userhistory_id='$postjson[userhistory_id]'");
+		userhistory_name='$postjson[userhistory_name]', userhistory_color='$postjson[userhistory_color]' WHERE userhistory_id='$postjson[userhistory_id]'");
 
 	if($query) $result = json_encode(array('success'=>true, 'result'=>'success'));
 	else $result = json_encode(array('success'=>false, 'result'=>'error'));
