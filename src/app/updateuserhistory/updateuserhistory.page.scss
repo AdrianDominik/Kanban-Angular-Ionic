@@ -2,7 +2,7 @@ ion-content {
     --background: url('/../../../assets/icon/home-hero-bg.png')  no-repeat center center / cover ;
 }
 
-.contaier-login {
+.contaier {
     width: 90%;
     padding: 10px;
     background: #FFFFFF;
@@ -14,7 +14,7 @@ ion-content {
 
 @media only screen and (min-width: 768px) {
 
-    .contaier-login {
+    .contaier {
         width: 40%;
         padding: 10px;
         background: #FFFFFF;

@@ -1,7 +1,7 @@
 <ion-content>
 
 	<ion-slide>
-		<div class="contaier-login">
+		<div class="contaier">
 			<ion-grid>
 				<ion-row>
 					<ion-col>
@@ -22,7 +22,7 @@
 				</ion-row>
 				<ion-row>
 					<ion-col>
-						<ion-button expand="block" padding color="tertiary" *ngIf="!id" (click)="addProcess()" fill="outline">Añadir</ion-button>
+						<ion-button expand="block" padding color="tertiary" *ngIf="!id && !name_project == ''" (click)="addProcess()" fill="outline">Añadir</ion-button>
 						<ion-button expand="block" padding color="tertiary" *ngIf="id>=1" (click)="updateProcess()" fill="outline">Actualizar</ion-button>
 					</ion-col>
 				</ion-row>
